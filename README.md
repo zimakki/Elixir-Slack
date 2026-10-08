@@ -24,7 +24,7 @@ def application do
 end
 
 def deps do
-  [{:slack, "~> 0.23.5"}]
+  [{:slack, "~> 0.23.5"}, {:httpoison, "~> 1.2"}]
 end
 ```
 
@@ -139,6 +139,10 @@ end)
 ```
 
 ### Web Client Configuration
+
+`httpoison` is an optional dependency. The default web client (`Slack.Web.DefaultClient`)
+and the RTM bot need it, so add `{:httpoison, "~> 1.2"}` to your deps to use them.
+You can leave it out if you configure a custom client as shown below and don't use the RTM bot.
 
 A custom client callback module can be configured for cases in which you need extra control
 over how calls to the web API are performed. This can be used to control timeouts, or to add additional

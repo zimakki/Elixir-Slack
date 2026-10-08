@@ -11,6 +11,8 @@ end
 defmodule Slack.Rtm do
   @moduledoc false
 
+  @compile {:no_warn_undefined, HTTPoison}
+
   def start(token) do
     with url <- slack_url(token),
          headers <- [],
@@ -21,7 +23,7 @@ defmodule Slack.Rtm do
     end
   end
 
-  defp handle_response({:ok, %HTTPoison.Response{body: body}}) do
+  defp handle_response({:ok, %{__struct__: HTTPoison.Response, body: body}}) do
     case Jason.decode!(body, keys: :atoms) do
       %{ok: true} = json ->
         {:ok, json}

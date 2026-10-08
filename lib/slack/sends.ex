@@ -2,6 +2,8 @@ defmodule Slack.Sends do
   @moduledoc "Utility functions for sending slack messages"
   alias Slack.Lookups
 
+  @compile {:no_warn_undefined, HTTPoison}
+
   @doc """
   Sends `text` to `channel` for the given `slack` connection.  `channel` can be
   a string in the format of `"#CHANNEL_NAME"`, `"@USER_NAME"`, or any ID that
